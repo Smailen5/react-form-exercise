@@ -34,7 +34,7 @@ export const YouTubeForm = () => {
           //   Per email non é necessario require é sufficiente pattern inserendo il value pattern e il messaggio di errore
           {...register("email", {
             pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+              value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
               message: "email non valida",
             },
           })}
