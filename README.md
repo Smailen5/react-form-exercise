@@ -1,6 +1,6 @@
 # Form sample Youtube
 
-- form di esempio (non simile a quello di youtbe) per esercizio con i form su react
+- form di esempio (non simile a quello di youtube) per esercizio con i form su react
 
 # Obbiettivi
 
@@ -16,6 +16,17 @@
 - npm i react-hook-form
 - npm i -D @hookform/devtools
 
+# Codice usato
+
+Questo va bene ma e possibile usare un oggetto per passarli piu proprieta:
+```js
+validate: (fieldValue) => {
+    return (
+    fieldValue !== "admin@example.com" ||
+    "Inserisci una email diversa"
+    );
+}
+```
 
 # Links utili
 

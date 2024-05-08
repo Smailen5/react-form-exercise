@@ -48,11 +48,16 @@ export const YouTubeForm = () => {
               message: "email non valida",
             },
             // In questo modo si personalizza la validazione del form, es. usa una email diversa da quella di esempio
-            validate: (fieldValue) => {
-              return (
-                fieldValue !== "admin@example.com" ||
-                "Inserisci una email diversa"
-              );
+            validate: {
+              notAdmin: (fieldValue) => {
+                return (
+                  fieldValue !== "admin@example.com" ||
+                  "Inserisci una email diversa"
+                );
+              },
+              notBlackListed: (fieldValue) => {
+                return !fieldValue.endsWith('baddomain.com') || 'dominio non e supportato'
+              },
             },
           })}
         />
