@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  background-color: theme("colors.zinc.800");
+  color: theme('colors.white')
+}
+input {
+  @apply p-2 mb-4 border bg-zinc-700 rounded-md
+}
+label {
+  @apply block mb-2
+}
