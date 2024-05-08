@@ -8,3 +8,16 @@
 - validazione per ogni campo
 - utilizzo della libreria react-hook-form
 - rendere esteticamente bella la pagina
+
+# Roba installata
+
+- react (vedi installazione ufficiale vite+react)
+- tailwind (vedi installazione tailwind ufficiale per vite)
+- npm i react-hook-form
+- npm i -D @hookform/devtools
+
+
+# Links utili
+
+- Documentazione [React hook form](https://react-hook-form.com/get-started)
+- regex per validazione email [regexr.com](https://regexr.com/3e48o)

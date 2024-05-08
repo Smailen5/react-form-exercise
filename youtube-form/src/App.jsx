@@ -1,4 +1,3 @@
-import React from "react";
 import { YouTubeForm } from "./components/YouTubeForm";
 import "./App.css";
 
