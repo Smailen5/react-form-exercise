@@ -4,11 +4,11 @@
 
 :root {
   background-color: theme("colors.zinc.800");
-  color: theme('colors.white')
+  color: theme("colors.white");
 }
 input {
-  @apply p-2 mb-4 border bg-zinc-700 rounded-md
+  @apply p-2 mb-4 border bg-zinc-700 rounded-md;
 }
 label {
-  @apply block mb-2
+  @apply inline mb-1;
 }
