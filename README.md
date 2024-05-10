@@ -32,3 +32,4 @@ validate: (fieldValue) => {
 
 - Documentazione [React hook form](https://react-hook-form.com/get-started)
 - regex per validazione email [regexr.com](https://regexr.com/3e48o)
+- Dati di esempio [jsonplaceholder](https://jsonplaceholder.typicode.com/)
