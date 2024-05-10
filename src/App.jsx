@@ -3,7 +3,7 @@ import "./App.css";
 
 export const App = () => {
   return (
-    <div className="grid justify-center content-center h-svh">
+    <div className="grid h-full justify-center content-center">
       <YouTubeForm />
     </div>
   );

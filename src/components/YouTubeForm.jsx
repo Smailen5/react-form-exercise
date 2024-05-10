@@ -1,4 +1,4 @@
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 export const YouTubeForm = () => {
@@ -24,7 +24,7 @@ export const YouTubeForm = () => {
     },
   });
   //  Controlla e gestisce il form, vedi react hook form documentation per maggiori info
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -36,8 +36,13 @@ export const YouTubeForm = () => {
     console.log("Dati in arrivo", data);
   };
 
+  // Possiamo osservare qualsiasi valore passando watch come argomento, ci pensera hook-form a chiamare useWatch
+  // BUG: eslint da un errore ma funziona tutto correttamente
+  const watchUsername = watch("username");
+
   return (
     <>
+      <h2>Watched value: {watchUsername}</h2>
       <form
         className="grid text-left"
         onSubmit={handleSubmit(onSubmit)}
@@ -181,7 +186,11 @@ export const YouTubeForm = () => {
           Date of birth
         </label>
 
-        <input type="date" id="date-birth" {...register("date-birth", { valueAsDate: true })} />
+        <input
+          type="date"
+          id="date-birth"
+          {...register("date-birth", { valueAsDate: true })}
+        />
 
         <button type="submit" className="w-full p-4 bg-stone-500 rounded-md">
           Submit
