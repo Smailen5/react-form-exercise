@@ -1,6 +1,6 @@
-# Form sample Youtube
+# Form sample
 
-- form di esempio (non simile a quello di youtube) per esercizio con i form su react
+- Esercizio form per React utilizzando react hook form
 
 # Obbiettivi
 
