@@ -2,7 +2,25 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 export const YouTubeForm = () => {
-  const form = useForm();
+  const form = useForm({
+    // Richiamiamo i valori salvati in precedenza dal utente
+    defaultValues: async () => {
+      const response = await fetch(
+        // dati esempio di Json placeholder
+        "https://jsonplaceholder.typicode.com/users/1"
+      );
+      const data = await response.json();
+      return {
+        username: data.username,
+        email: data.email,
+        // Se vuoi raggruppare dei dati puoi usare oggetti nidificati
+        social: {
+          twitter: "",
+          facebook: "",
+        },
+      };
+    },
+  });
   //  Controlla e gestisce il form, vedi react hook form documentation per maggiori info
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
@@ -56,24 +74,26 @@ export const YouTubeForm = () => {
                 );
               },
               notBlackListed: (fieldValue) => {
-                return !fieldValue.endsWith('baddomain.com') || 'dominio non e supportato'
+                return (
+                  !fieldValue.endsWith("baddomain.com") ||
+                  "dominio non e supportato"
+                );
               },
             },
           })}
         />
 
-        <label htmlFor="channel" className="flex justify-between items-center">
-          Channel
-          <span className="text-red-500 text-xs">
-            {errors.channel?.message}
-          </span>
+        <label htmlFor="twitter" className="flex justify-between items-center">
+          Twitter
+        </label>
+          {/* Essendo in un oggetto nidificato non dimenticare la dot. notation */}
+        <input type="text" id="twitter" {...register("social.twitter")} />
+
+        <label htmlFor="facebook" className="flex justify-between items-center">
+          Facebook
         </label>
 
-        <input
-          type="text"
-          id="channel"
-          {...register("channel", { required: "canale youtube richiesto" })}
-        />
+        <input type="text" id="facebook" {...register("social.facebook")} />
 
         <button type="submit" className="w-full p-4 bg-stone-500 rounded-md">
           Submit
