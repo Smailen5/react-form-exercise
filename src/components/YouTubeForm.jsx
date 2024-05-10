@@ -18,6 +18,7 @@ export const YouTubeForm = () => {
           twitter: "",
           facebook: "",
         },
+        phoneNumber: ["", ""],
       };
     },
   });
@@ -86,7 +87,7 @@ export const YouTubeForm = () => {
         <label htmlFor="twitter" className="flex justify-between items-center">
           Twitter
         </label>
-          {/* Essendo in un oggetto nidificato non dimenticare la dot. notation */}
+        {/* Essendo in un oggetto nidificato non dimenticare la dot. notation */}
         <input type="text" id="twitter" {...register("social.twitter")} />
 
         <label htmlFor="facebook" className="flex justify-between items-center">
@@ -94,6 +95,24 @@ export const YouTubeForm = () => {
         </label>
 
         <input type="text" id="facebook" {...register("social.facebook")} />
+
+        <label
+          htmlFor="phone-primary"
+          className="flex justify-between items-center"
+        >
+          Phone number
+        </label>
+          {/* Ricorda la dot. notation e non la [] notation */}
+        <input type="number" id="phone-primary" {...register("phoneNumber.0")} />
+
+        <label
+          htmlFor="phone-secondary"
+          className="flex justify-between items-center"
+        >
+          House number
+        </label>
+
+        <input type="number" id="phone-secondary" {...register("phoneNumber.1")} />
 
         <button type="submit" className="w-full p-4 bg-stone-500 rounded-md">
           Submit
