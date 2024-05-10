@@ -4,7 +4,6 @@
 
 # Obbiettivi
 
-- form con auto compilazione
 - validazione per ogni campo
 - utilizzo della libreria react-hook-form
 - rendere esteticamente bella la pagina
@@ -13,8 +12,8 @@
 
 - react (vedi installazione ufficiale vite+react)
 - tailwind (vedi installazione tailwind ufficiale per vite)
-- npm i react-hook-form
-- npm i -D @hookform/devtools
+- `npm i react-hook-form`
+- `npm i -D @hookform/devtools`
 
 # Codice usato
 
