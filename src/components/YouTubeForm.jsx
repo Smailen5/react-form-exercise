@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 export const YouTubeForm = () => {
@@ -19,12 +19,18 @@ export const YouTubeForm = () => {
           facebook: "",
         },
         phoneNumber: ["", ""],
+        phNumbers: [{ number: "" }],
       };
     },
   });
   //  Controlla e gestisce il form, vedi react hook form documentation per maggiori info
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
+
+  const { fields, append, remove } = useFieldArray({
+    name: "phNumbers",
+    control,
+  });
 
   const onSubmit = (data) => {
     console.log("Dati in arrivo", data);
@@ -102,8 +108,12 @@ export const YouTubeForm = () => {
         >
           Phone number
         </label>
-          {/* Ricorda la dot. notation e non la [] notation */}
-        <input type="number" id="phone-primary" {...register("phoneNumber.0")} />
+        {/* Ricorda la dot. notation e non la [] notation */}
+        <input
+          type="number"
+          id="phone-primary"
+          {...register("phoneNumber.0")}
+        />
 
         <label
           htmlFor="phone-secondary"
@@ -112,8 +122,46 @@ export const YouTubeForm = () => {
           House number
         </label>
 
-        <input type="number" id="phone-secondary" {...register("phoneNumber.1")} />
+        <input
+          type="number"
+          id="phone-secondary"
+          {...register("phoneNumber.1")}
+        />
+        {/* Aggiungere dinamicamente piu campi di input */}
+        <label htmlFor="" className="flex justify-between items-center">
+          List of phone numbers
+        </label>
 
+        {fields.map((field, index) => {
+          return (
+            <>
+              <input
+                type="text"
+                key={field.id}
+                {...register(`phNumbers.${index}.number`)}
+              />
+              {/* Cosi aggiunge un bottone per eliminare un numero direttamente sotto al tag input, lo genera ogni volta se ce piu di
+              un input, scompare quando ce solo un input */}
+              {index > 0 && (
+                <button
+                  type="button"
+                  // ora il bastardo maledetto accetta index, almeno elimina quel numero e non l'ultimo numero immesso
+                  onClick={() => remove(index)}
+                  className="w-full p-4 mb-4 bg-red-400 rounded-md"
+                >
+                  Remove phone number
+                </button>
+              )}
+            </>
+          );
+        })}
+        <button
+          type="button"
+          onClick={() => append({ number: "" })}
+          className="w-full p-4 mb-4 bg-stone-500 rounded-md"
+        >
+          Add phone number
+        </button>
         <button type="submit" className="w-full p-4 bg-stone-500 rounded-md">
           Submit
         </button>
