@@ -18,7 +18,7 @@ export const YouTubeForm = () => {
           twitter: "",
           facebook: "",
         },
-        phoneNumber: ["", ""],
+        phoneNumber: [""],
         phNumbers: [{ number: "" }],
       };
     },
@@ -37,7 +37,7 @@ export const YouTubeForm = () => {
   };
 
   return (
-    <div className="">
+    <>
       <form
         className="grid text-left"
         onSubmit={handleSubmit(onSubmit)}
@@ -67,27 +67,31 @@ export const YouTubeForm = () => {
           type="email"
           id="email"
           //   Per email non é necessario require é sufficiente pattern inserendo il value pattern e il messaggio di errore
-          {...register("email", {
-            pattern: {
-              value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-              message: "email non valida",
-            },
-            // In questo modo si personalizza la validazione del form, es. usa una email diversa da quella di esempio
-            validate: {
-              notAdmin: (fieldValue) => {
-                return (
-                  fieldValue !== "admin@example.com" ||
-                  "Inserisci una email diversa"
-                );
+          {...register(
+            "email",
+            { required: "email richiesta" },
+            {
+              pattern: {
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                message: "email non valida",
               },
-              notBlackListed: (fieldValue) => {
-                return (
-                  !fieldValue.endsWith("baddomain.com") ||
-                  "dominio non e supportato"
-                );
+              // In questo modo si personalizza la validazione del form, es. usa una email diversa da quella di esempio
+              validate: {
+                notAdmin: (fieldValue) => {
+                  return (
+                    fieldValue !== "admin@example.com" ||
+                    "Inserisci una email diversa"
+                  );
+                },
+                notBlackListed: (fieldValue) => {
+                  return (
+                    !fieldValue.endsWith("baddomain.com") ||
+                    "dominio non e supportato"
+                  );
+                },
               },
-            },
-          })}
+            }
+          )}
         />
 
         <label htmlFor="twitter" className="flex justify-between items-center">
@@ -115,23 +119,10 @@ export const YouTubeForm = () => {
           {...register("phoneNumber.0")}
         />
 
-        <label
-          htmlFor="phone-secondary"
-          className="flex justify-between items-center"
-        >
-          House number
-        </label>
-
-        <input
-          type="number"
-          id="phone-secondary"
-          {...register("phoneNumber.1")}
-        />
         {/* Aggiungere dinamicamente piu campi di input */}
         <label htmlFor="" className="flex justify-between items-center">
           List of phone numbers
         </label>
-
         {fields.map((field, index) => {
           return (
             <>
@@ -145,16 +136,17 @@ export const YouTubeForm = () => {
               {index > 0 && (
                 <button
                   type="button"
-                  // ora il bastardo maledetto accetta index, almeno elimina quel numero e non l'ultimo numero immesso
+                  // ora il bastardo maledetto accetta index, almeno elimina il numero a cui si trova e non l'ultimo numero immesso
                   onClick={() => remove(index)}
-                  className="w-full p-4 mb-4 bg-red-400 rounded-md"
+                  className="w-full p-1 mb-4 bg-red-400 rounded-md"
                 >
-                  Remove phone number
+                  Remove
                 </button>
               )}
             </>
           );
         })}
+
         <button
           type="button"
           onClick={() => append({ number: "" })}
@@ -162,12 +154,41 @@ export const YouTubeForm = () => {
         >
           Add phone number
         </button>
+
+        <label htmlFor="age" className="flex justify-between items-center">
+          Age
+          {/* Attenzione che dopo age ci va ´?´ altrimenti non controlla se e contenuto qualcosa */}
+          <p className="text-red-500 text-xs">{errors.age?.message}</p>
+        </label>
+
+        <input
+          type="number"
+          id="age"
+          // Puoi usare valueAsNumber per convertire la stringa inserita in numero
+          {...register(
+            "age",
+            { valueAsNumber: true },
+            {
+              required: "eta' richiesta",
+            }
+          )}
+        />
+
+        <label
+          htmlFor="date-birth"
+          className="flex justify-between items-center"
+        >
+          Date of birth
+        </label>
+
+        <input type="date" id="date-birth" {...register("date-birth", { valueAsDate: true })} />
+
         <button type="submit" className="w-full p-4 bg-stone-500 rounded-md">
           Submit
         </button>
       </form>
       {/* da chiamare dopo la chiusura del form */}
       <DevTool control={control} />
-    </div>
+    </>
   );
 };

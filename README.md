@@ -28,6 +28,15 @@ validate: (fieldValue) => {
 }
 ```
 
+Ricorda di aggiungere 
+```js
+<DevTool control={control} />
+```
+alla fine del form, ricorda inoltre che devi passare `{ control }` a chi sta usando `useFrom()`
+
+Nel form puoi usare `{ valueAsNumber: true }` o `{ valueAsDate: true }` per cambiare direttamente i valori da stringa 
+
+
 # Links utili
 
 - Documentazione [React hook form](https://react-hook-form.com/get-started)
