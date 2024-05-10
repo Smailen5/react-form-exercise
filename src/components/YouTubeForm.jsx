@@ -1,5 +1,8 @@
-import { useForm, useFieldArray, useWatch } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import { useEffect } from "react";
+
+let renderCount = 0;
 
 export const YouTubeForm = () => {
   const form = useForm({
@@ -38,11 +41,21 @@ export const YouTubeForm = () => {
 
   // Possiamo osservare qualsiasi valore passando watch come argomento, ci pensera hook-form a chiamare useWatch
   // BUG: eslint da un errore ma funziona tutto correttamente
-  const watchUsername = watch("username");
+  // const watchUsername = watch("username");
+
+  // Per migliorare le prestazioni passiamo watch dentro a un useEffect cosi non renderizza ogni volta il componente
+  useEffect(() => {
+    const subscription = watch((value) => {
+      console.log(value);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  renderCount++;
 
   return (
     <>
-      <h2>Watched value: {watchUsername}</h2>
+      <h2>Form render ( {renderCount / 2} )</h2>
       <form
         className="grid text-left"
         onSubmit={handleSubmit(onSubmit)}

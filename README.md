@@ -34,7 +34,9 @@ Ricorda di aggiungere
 ```
 alla fine del form, ricorda inoltre che devi passare `{ control }` a chi sta usando `useFrom()`
 
-Nel form puoi usare `{ valueAsNumber: true }` o `{ valueAsDate: true }` per cambiare direttamente i valori da stringa 
+- Nel form puoi usare `{ valueAsNumber: true }` o `{ valueAsDate: true }` per cambiare direttamente i valori da stringa 
+
+Puoi passare come argomento anche un array a `watch(['username', 'email'])`
 
 
 # Links utili
